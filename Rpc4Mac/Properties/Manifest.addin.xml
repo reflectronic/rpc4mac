@@ -3,4 +3,8 @@
     <Runtime>
     </Runtime>
 
+    <Extension path="/MonoDevelop/Ide/StartupHandlers">
+        <Class class="Rpc4Mac.DiscordRichPresenceHandler" />
+    </Extension>
+
 </ExtensionModel>
