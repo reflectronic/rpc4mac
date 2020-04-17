@@ -86,30 +86,17 @@ namespace Rpc4Mac
 
         void UpdateRichPresence(Document document, WorkspaceObject workspace)
         {
-            var largeImageKey = (Options.ShowCurrentFile.Value, Options.ShowCurrentProject.Value) switch
-            {
-                // If the user wants to display the current file, use that to determine the icon.
-                (true, _) => document?.FileName.Extension switch
-                {
-                    ".cs" => "csharp",
-                    ".fs" => "fsharp",
-                    _ => "unknown"
-                },
-                // Otherwise, if the user only wants to display the current project, determine that from the project type.
-                (false, true) => document?.Owner.ItemDirectory.Extension switch
-                {
-                    ".csproj" => "csharp",
-                    ".fsproj" => "fsharp",
-                    _ => "unknown"
-                },
-                _ => "unknown"
-            };
-
             presence = new RichPresence()
             {
                 Assets = new Assets()
                 {
-                    LargeImageKey = largeImageKey,
+                    LargeImageKey = document?.FileName.Extension switch
+                    {
+                        var _ when !Options.ShowCurrentFile.Value => "unknown",
+                        ".cs" => "csharp",
+                        ".fs" => "fsharp",
+                        _ => "unknown"
+                    },
                     SmallImageKey = "vs",
                     SmallImageText = $"Visual Studio for Mac {IdeApp.Version}"
                 },
