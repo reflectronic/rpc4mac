@@ -1,6 +1,5 @@
 ﻿using Gtk;
 using MonoDevelop.Components;
-using MonoDevelop.Ide;
 using MonoDevelop.Ide.Gui.Dialogs;
 
 namespace Rpc4Mac
