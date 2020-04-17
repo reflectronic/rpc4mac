@@ -9,7 +9,7 @@
 
     <Extension path="/MonoDevelop/Ide/GlobalOptionsDialog">
         <Section id="RichPresenceOptions" _label="Discord Rich Presence" insertafter="VersionControl">
-            <Section id="RichPresenceOptionsGeneral" _label="General" fill="true" class="Rpc4Mac.DiscordRichPresenceOptionsPanel" />
+            <Section id="RichPresenceOptionsGeneral" _label="General" fill="true" class="Rpc4Mac.GeneralOptionsPanel" />
         </Section>
     </Extension>
 

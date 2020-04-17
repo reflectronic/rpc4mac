@@ -4,7 +4,7 @@ using MonoDevelop.Core;
 
 namespace Rpc4Mac
 {
-    public static class DiscordRichPresenceOptions
+    public static class Options
     {
         public static readonly ConfigurationProperty<string> ApplicationId = ConfigurationProperty.Create(CreateName(), "700501887937544262");
         public static readonly ConfigurationProperty<bool> EnableRichPresence = ConfigurationProperty.Create(CreateName(), true);
