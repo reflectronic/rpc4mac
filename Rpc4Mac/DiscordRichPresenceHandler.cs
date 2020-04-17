@@ -65,8 +65,8 @@ namespace Rpc4Mac
                     SmallImageText = $"Visual Studio for Mac {IdeApp.Version}"
                 },
                 Details = document?.FileName.FileName,
-                State = workspace?.Name,
-                Timestamps = new Timestamps(startSession),
+                State = workspace is null ? null : "Developing " + workspace.Name,
+                Timestamps = new Timestamps(startSession)
             };
 
             client.SetPresence(presence);

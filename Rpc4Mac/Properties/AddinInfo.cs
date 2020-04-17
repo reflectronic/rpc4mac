@@ -9,5 +9,5 @@ using Mono.Addins.Description;
 
 [assembly: AddinName("Rpc4Mac")]
 [assembly: AddinCategory("IDE extensions")]
-[assembly: AddinDescription("Discord Rich Presense on Visual Studio for Mac")]
+[assembly: AddinDescription("Discord Rich Presence on Visual Studio for Mac")]
 [assembly: AddinAuthor("John Tur")]
