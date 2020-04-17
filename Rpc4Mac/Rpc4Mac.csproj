@@ -1,9 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net471</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="MonoDevelop.Addins" Version="0.4.6" />
-    <PackageReference Include="DiscordRichPresence" Version="1.0.150" />
-  </ItemGroup>
+
+    <PropertyGroup>
+        <TargetFramework>net471</TargetFramework>
+        <LangVersion>8.0</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MonoDevelop.Addins" Version="0.4.6" />
+        <PackageReference Include="DiscordRichPresence" Version="1.0.150" />
+    </ItemGroup>
+
 </Project>

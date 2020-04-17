@@ -32,11 +32,35 @@ namespace Rpc4Mac
             client.Initialize();
 
             timer = new Timer(_ => client.SetPresence(presence), null, TimeSpan.Zero, TimeSpan.FromSeconds(10));
+
+            IdeApp.Exited += delegate
+            {
+                client.Dispose();
+            };
+
+            UpdateRichPresence(null, null);
         }
 
         void UpdateRichPresence(Document document, WorkspaceObject workspace)
         {
-            MessageService.ShowMessage("Rich Presence Update", $"Your current document is {document?.Name ?? "None"}");
+            presence = new RichPresence()
+            {
+                Assets = new Assets()
+                {
+                    LargeImageKey = document?.FileName.Extension switch
+                    {
+                        ".cs" => "csharp",
+                        ".fs" => "fsharp",
+                        _ => "unknown"
+                    },
+                    SmallImageKey = "vs"
+                },
+                Details = document?.FileName.FileName ?? "No file",
+                State = workspace?.Name ?? "No workspace",
+                Timestamps = new Timestamps(DateTime.UtcNow),
+            };
+
+            client.SetPresence(presence);
         }
     }
 }
