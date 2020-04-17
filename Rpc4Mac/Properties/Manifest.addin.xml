@@ -7,4 +7,10 @@
         <Class class="Rpc4Mac.DiscordRichPresenceHandler" />
     </Extension>
 
+    <Extension path="/MonoDevelop/Ide/GlobalOptionsDialog">
+        <Section id="RichPresenceOptions" _label="Discord Rich Presence" insertafter="VersionControl">
+            <Section id="RichPresenceOptionsGeneral" _label="General" fill="true" class="Rpc4Mac.DiscordRichPresenceOptions" />
+        </Section>
+    </Extension>
+
 </ExtensionModel>
