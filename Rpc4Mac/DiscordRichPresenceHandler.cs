@@ -13,12 +13,13 @@ namespace Rpc4Mac
         DiscordRpcClient client;
 
         RichPresence presence;
+        DateTime startSession;
 
         Timer timer;
 
         protected override void Run()
         {
-            IdeApp.Workbench.ActiveDocumentChanged += (sender, e) => UpdateRichPresence(e.Document, e.Document?.Owner);
+            IdeApp.Workbench.ActiveDocumentChanged += (sender, e) => UpdateRichPresence(e.Document, e.Document?.Owner ?? IdeApp.Workspace);
 
             IdeApp.FocusIn += delegate
             {
@@ -26,7 +27,14 @@ namespace Rpc4Mac
                 UpdateRichPresence(doc, doc?.Owner);
             };
 
-            IdeApp.Workspace.LastWorkspaceItemClosed += (sender, e) => UpdateRichPresence(null, null);
+            IdeApp.Workspace.FirstWorkspaceItemOpened += (sender, e) => startSession = DateTime.UtcNow;
+            IdeApp.Workspace.LastWorkspaceItemClosed += delegate
+            {
+                UpdateRichPresence(null, null);
+                startSession = DateTime.UtcNow;
+            };
+
+            startSession = DateTime.UtcNow;
 
             client = new DiscordRpcClient("700501887937544262");
             client.Initialize();
@@ -53,11 +61,12 @@ namespace Rpc4Mac
                         ".fs" => "fsharp",
                         _ => "unknown"
                     },
-                    SmallImageKey = "vs"
+                    SmallImageKey = "vs",
+                    SmallImageText = $"Visual Studio for Mac {IdeApp.Version}"
                 },
-                Details = document?.FileName.FileName ?? "No file",
-                State = workspace?.Name ?? "No workspace",
-                Timestamps = new Timestamps(DateTime.UtcNow),
+                Details = document?.FileName.FileName,
+                State = workspace?.Name,
+                Timestamps = new Timestamps(startSession),
             };
 
             client.SetPresence(presence);
